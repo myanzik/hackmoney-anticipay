@@ -63,7 +63,7 @@ export default function Home() {
           <div>
             <input
               type="text"
-              placeholder="Search communities by name or region..."
+              placeholder="Search communities by name or hazard..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -72,7 +72,7 @@ export default function Home() {
 
           {/* Hazard Filter */}
           <div>
-            <p className="text-sm font-medium text-gray-700 mb-3">Filter by Hazard Type</p>
+            <p className="text-sm font-medium text-gray-700 mb-3">Filter by Hazard </p>
             <div className="flex flex-wrap gap-2">
               {hazards.map(hazard => (
                 <button
