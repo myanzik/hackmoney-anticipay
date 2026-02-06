@@ -4,14 +4,6 @@
 
 Your AnticiPay community listing and funding application is ready to run!
 
-### What's Included
-
-✅ **Community Discovery Page** - Browse 6 pre-created communities with funding progress  
-✅ **Community Detail Pages** - Explore individual communities with full information  
-✅ **Blockchain Wallet Integration** - Connect MetaMask, WalletConnect, and other wallets  
-✅ **Base Sepolia Testnet** - All transactions on testnet for safe testing  
-✅ **Responsive Design** - Works on desktop, tablet, and mobile  
-✅ **Search & Filter** - Discover communities by hazard type and location  
 
 ### Quick Start
 
