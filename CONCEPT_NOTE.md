@@ -64,7 +64,6 @@ Donors can contribute to specific regions, hazards, or programs and observe real
 
 The treasury becomes a **living pool of resilience capital**, not a static donation pot.
 
----
 
 ### 4.2 Adaptive UBI Streaming
 
