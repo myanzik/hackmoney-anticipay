@@ -38,30 +38,6 @@ export const communities: Community[] = [
   },
   {
     id: "3",
-    name: "Mountain Landslide Response",
-    description: "Disaster relief streaming for mountain communities at risk of landslides during monsoon season. Supports evacuation and recovery assistance.",
-    walletAddress: "0x7890abcdef1234567890abcdef1234567890abcd",
-    currentFunding: 15000000000000000000, // 15 ETH in wei
-    targetFunding: 250000000000000000000, // 250 ETH in wei
-    region: "Ilam, Panchthar, Nepal",
-    hazardType: "Landslide",
-    beneficiaries: 150,
-    logo: "⛰️"
-  },
-  {
-    id: "4",
-    name: "Refugee Camp Assistance",
-    description: "Continuous UBI streaming for refugee populations providing dignified, predictable financial support for essential needs.",
-    walletAddress: "0xdef1234567890abcdef1234567890abcdef12345",
-    currentFunding: 35000000000000000000, // 35 ETH in wei
-    targetFunding: 400000000000000000000, // 400 ETH in wei
-    region: "Multiple camps across Nepal",
-    hazardType: "Displacement",
-    beneficiaries: 500,
-    logo: "🏕️"
-  },
-  {
-    id: "5",
     name: "Urban Poverty Safety Net",
     description: "Basic income streaming for urban low-income households to build financial resilience and enable income-generating opportunities.",
     walletAddress: "0x1234567890abcdef12345678901abcdef1234567",
@@ -73,7 +49,7 @@ export const communities: Community[] = [
     logo: "🏙️"
   },
   {
-    id: "6",
+    id: "4",
     name: "Agricultural Drought Relief",
     description: "Anticipatory support for farming communities during drought seasons. Helps farmers manage crop failures and maintain livelihoods.",
     walletAddress: "0x567890abcdef1234567890abcdef1234567890ab",
