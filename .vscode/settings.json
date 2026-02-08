@@ -2,6 +2,9 @@
     "chat.tools.terminal.autoApprove": {
         "npm init": true,
         "npm install": true,
-        "npx hardhat": true
+        "npx hardhat": true,
+        "mv": true,
+        "npm pkg": true,
+        "npm uninstall": true
     }
 }

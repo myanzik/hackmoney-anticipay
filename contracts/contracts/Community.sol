@@ -1,10 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+
 /**
  * @title Community
  * @notice Individual community treasury contract that holds funds for a specific community
- * @dev Each community deployed by CommunityTreasury has its own instance of this contract
+ * @dev Supports both ETH and ERC20 tokens (primarily USDC)
  */
 contract Community {
     /// @notice The name of the community
@@ -13,20 +15,38 @@ contract Community {
     /// @notice The treasury address that manages this community
     address public treasury;
 
-    /// @notice Total amount of funds raised for this community
-    uint256 public totalFundsRaised;
+    /// @notice USDC token address on Base (0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913)
+    address public constant USDC = 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913;
 
-    /// @notice Total amount of funds withdrawn from this community
-    uint256 public totalFundsWithdrawn;
+    /// @notice Total amount of ETH raised for this community
+    uint256 public totalETHRaised;
 
-    /// @notice Mapping of beneficiary addresses to their withdrawal amounts
-    mapping(address => uint256) public beneficiaryWithdrawals;
+    /// @notice Total amount of USDC raised for this community
+    uint256 public totalUSDCRaised;
 
-    /// @notice Event emitted when funds are deposited
-    event FundsDeposited(address indexed from, uint256 amount);
+    /// @notice Total amount of ETH withdrawn from this community
+    uint256 public totalETHWithdrawn;
 
-    /// @notice Event emitted when funds are withdrawn by a beneficiary
-    event FundsWithdrawn(address indexed beneficiary, uint256 amount);
+    /// @notice Total amount of USDC withdrawn from this community
+    uint256 public totalUSDCWithdrawn;
+
+    /// @notice Mapping of beneficiary addresses to their ETH withdrawal amounts
+    mapping(address => uint256) public beneficiaryETHWithdrawals;
+
+    /// @notice Mapping of beneficiary addresses to their USDC withdrawal amounts
+    mapping(address => uint256) public beneficiaryUSDCWithdrawals;
+
+    /// @notice Event emitted when ETH is deposited
+    event ETHDeposited(address indexed from, uint256 amount);
+
+    /// @notice Event emitted when USDC is deposited
+    event USDCDeposited(address indexed from, uint256 amount);
+
+    /// @notice Event emitted when ETH is withdrawn by a beneficiary
+    event ETHWithdrawn(address indexed beneficiary, uint256 amount);
+
+    /// @notice Event emitted when USDC is withdrawn by a beneficiary
+    event USDCWithdrawn(address indexed beneficiary, uint256 amount);
 
     /**
      * @notice Constructor to initialize the Community contract
@@ -44,79 +64,163 @@ contract Community {
      * @dev This function is called when the contract receives ETH without any calldata
      */
     receive() external payable {
-        totalFundsRaised += msg.value;
-        emit FundsDeposited(msg.sender, msg.value);
+        totalETHRaised += msg.value;
+        emit ETHDeposited(msg.sender, msg.value);
     }
 
     /**
-     * @notice Withdraw funds as a beneficiary
+     * @notice Deposit USDC for this community
+     * @param _amount The amount of USDC to deposit (in wei, 6 decimals for USDC)
+     */
+    function depositUSDC(uint256 _amount) external {
+        require(_amount > 0, "Deposit amount must be greater than 0");
+        require(
+            IERC20(USDC).transferFrom(msg.sender, address(this), _amount),
+            "USDC transfer failed"
+        );
+        totalUSDCRaised += _amount;
+        emit USDCDeposited(msg.sender, _amount);
+    }
+
+    /**
+     * @notice Withdraw ETH as a beneficiary
      * @param _amount The amount of ETH to withdraw (in wei)
      */
-    function withdraw(uint256 _amount) external {
+    function withdrawETH(uint256 _amount) external {
         require(_amount > 0, "Withdrawal amount must be greater than 0");
         require(
-            _amount <= getBalance(),
-            "Insufficient funds in community treasury"
+            _amount <= getETHBalance(),
+            "Insufficient ETH in community treasury"
         );
 
-        beneficiaryWithdrawals[msg.sender] += _amount;
-        totalFundsWithdrawn += _amount;
+        beneficiaryETHWithdrawals[msg.sender] += _amount;
+        totalETHWithdrawn += _amount;
 
         (bool success, ) = msg.sender.call{value: _amount}("");
-        require(success, "Transfer failed");
+        require(success, "ETH transfer failed");
 
-        emit FundsWithdrawn(msg.sender, _amount);
+        emit ETHWithdrawn(msg.sender, _amount);
     }
 
     /**
-     * @notice Admin function to withdraw funds by treasury
+     * @notice Withdraw USDC as a beneficiary
+     * @param _amount The amount of USDC to withdraw (in wei)
+     */
+    function withdrawUSDC(uint256 _amount) external {
+        require(_amount > 0, "Withdrawal amount must be greater than 0");
+        require(
+            _amount <= getUSDCBalance(),
+            "Insufficient USDC in community treasury"
+        );
+
+        beneficiaryUSDCWithdrawals[msg.sender] += _amount;
+        totalUSDCWithdrawn += _amount;
+
+        require(IERC20(USDC).transfer(msg.sender, _amount), "USDC transfer failed");
+
+        emit USDCWithdrawn(msg.sender, _amount);
+    }
+
+    /**
+     * @notice Admin function to withdraw ETH by treasury
      * @param _amount The amount of ETH to withdraw (in wei)
      * @param _recipient The address to receive the funds
      */
-    function adminWithdraw(uint256 _amount, address payable _recipient)
+    function adminWithdrawETH(uint256 _amount, address payable _recipient)
         external
     {
         require(msg.sender == treasury, "Only treasury can call this");
         require(_amount > 0, "Withdrawal amount must be greater than 0");
         require(
-            _amount <= getBalance(),
-            "Insufficient funds in community treasury"
+            _amount <= getETHBalance(),
+            "Insufficient ETH in community treasury"
         );
 
-        totalFundsWithdrawn += _amount;
+        totalETHWithdrawn += _amount;
 
         (bool success, ) = _recipient.call{value: _amount}("");
-        require(success, "Transfer failed");
+        require(success, "ETH transfer failed");
 
-        emit FundsWithdrawn(_recipient, _amount);
+        emit ETHWithdrawn(_recipient, _amount);
     }
 
     /**
-     * @notice Get the current balance of this community treasury
-     * @return The current balance in wei
+     * @notice Admin function to withdraw USDC by treasury
+     * @param _amount The amount of USDC to withdraw (in wei)
+     * @param _recipient The address to receive the funds
      */
-    function getBalance() public view returns (uint256) {
+    function adminWithdrawUSDC(uint256 _amount, address _recipient)
+        external
+    {
+        require(msg.sender == treasury, "Only treasury can call this");
+        require(_amount > 0, "Withdrawal amount must be greater than 0");
+        require(
+            _amount <= getUSDCBalance(),
+            "Insufficient USDC in community treasury"
+        );
+
+        totalUSDCWithdrawn += _amount;
+
+        require(IERC20(USDC).transfer(_recipient, _amount), "USDC transfer failed");
+
+        emit USDCWithdrawn(_recipient, _amount);
+    }
+
+    /**
+     * @notice Get the current ETH balance of this community treasury
+     * @return The current ETH balance in wei
+     */
+    function getETHBalance() public view returns (uint256) {
         return address(this).balance;
     }
 
     /**
-     * @notice Get the total funds available (total raised minus withdrawn)
-     * @return The total available funds in wei
+     * @notice Get the current USDC balance of this community treasury
+     * @return The current USDC balance in wei (6 decimals)
      */
-    function getAvailableFunds() public view returns (uint256) {
-        return totalFundsRaised - totalFundsWithdrawn;
+    function getUSDCBalance() public view returns (uint256) {
+        return IERC20(USDC).balanceOf(address(this));
     }
 
     /**
-     * @notice Get the beneficiary's total withdrawals
-     * @param _beneficiary The beneficiary address
-     * @return The total amount withdrawn by the beneficiary
+     * @notice Get the total ETH funds available (total raised minus withdrawn)
+     * @return The total available ETH funds in wei
      */
-    function getBeneficiaryWithdrawals(address _beneficiary)
+    function getAvailableETH() public view returns (uint256) {
+        return totalETHRaised - totalETHWithdrawn;
+    }
+
+    /**
+     * @notice Get the total USDC funds available (total raised minus withdrawn)
+     * @return The total available USDC funds in wei
+     */
+    function getAvailableUSDC() public view returns (uint256) {
+        return totalUSDCRaised - totalUSDCWithdrawn;
+    }
+
+    /**
+     * @notice Get the beneficiary's total ETH withdrawals
+     * @param _beneficiary The beneficiary address
+     * @return The total ETH amount withdrawn by the beneficiary
+     */
+    function getBeneficiaryETHWithdrawals(address _beneficiary)
         external
         view
         returns (uint256)
     {
-        return beneficiaryWithdrawals[_beneficiary];
+        return beneficiaryETHWithdrawals[_beneficiary];
+    }
+
+    /**
+     * @notice Get the beneficiary's total USDC withdrawals
+     * @param _beneficiary The beneficiary address
+     * @return The total USDC amount withdrawn by the beneficiary
+     */
+    function getBeneficiaryUSDCWithdrawals(address _beneficiary)
+        external
+        view
+        returns (uint256)
+    {
+        return beneficiaryUSDCWithdrawals[_beneficiary];
     }
 }

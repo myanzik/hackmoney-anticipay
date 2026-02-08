@@ -3,63 +3,63 @@
     "name": "baseSepolia",
     "chainId": "84532",
     "deployer": "0x2D0D3950E148c23a9bA9Fa5229815AFa2730FC33",
-    "deploymentDate": "2026-02-08T15:27:10.985Z"
+    "deploymentDate": "2026-02-08T15:51:49.519Z"
   },
   "treasury": {
-    "address": "0xdb2E9cCb12705D602C917401dF77fa05F465094A",
-    "deploymentTx": "0xea4c9d702ec4901f9e173b0aefba842d6c34704fb9791c09e1d5462da8ad4a76"
+    "address": "0x7145b4B62B4B39056aD432049997fe6535779eBD",
+    "deploymentTx": "0xe9ca215f4392b1d4e7d7c773619c09958ceb98609320ae982df15e7c943063c2"
   },
   "communities": [
     {
       "id": "kathmandu-flood",
       "name": "Kathmandu Flood Relief",
-      "contractAddress": "0xd9eEDd9838d6328cF16e20a4C536d57b257eaa85",
+      "contractAddress": "0x5044e09F6a07CBB9aed3379c351d17e28A904467",
       "ensName": "kathmandu-flood-relief.eth",
-      "createdAt": "2026-02-08T15:26:36.434Z",
+      "createdAt": "2026-02-08T15:51:16.437Z",
       "ensRegistration": {
         "success": true,
         "ensName": "kathmandu-flood-relief.eth",
-        "contractAddress": "0xd9eEDd9838d6328cF16e20a4C536d57b257eaa85",
-        "blockNumber": 37398065
+        "contractAddress": "0x5044e09F6a07CBB9aed3379c351d17e28A904467",
+        "blockNumber": 37398804
       }
     },
     {
       "id": "terai-heatwave",
       "name": "Terai Heatwave Protection",
-      "contractAddress": "0x3DE282515AC8148184077a062c84995d9Af4A43D",
+      "contractAddress": "0x694a3293A67c9659204b8EDD130551b5f6538779",
       "ensName": "terai-heatwave-protection.eth",
-      "createdAt": "2026-02-08T15:26:42.198Z",
+      "createdAt": "2026-02-08T15:51:21.665Z",
       "ensRegistration": {
         "success": true,
         "ensName": "terai-heatwave-protection.eth",
-        "contractAddress": "0x3DE282515AC8148184077a062c84995d9Af4A43D",
-        "blockNumber": 37398067
+        "contractAddress": "0x694a3293A67c9659204b8EDD130551b5f6538779",
+        "blockNumber": 37398806
       }
     },
     {
       "id": "urban-poverty",
       "name": "Urban Poverty Safety Net",
-      "contractAddress": "0xEb89746EE177E04251d7CDf8917E4C71aD6f361E",
+      "contractAddress": "0xd78FCe22e557246845236E7B6203e1dED28fd36b",
       "ensName": "urban-poverty-safety-net.eth",
-      "createdAt": "2026-02-08T15:26:49.785Z",
+      "createdAt": "2026-02-08T15:51:27.074Z",
       "ensRegistration": {
         "success": true,
         "ensName": "urban-poverty-safety-net.eth",
-        "contractAddress": "0xEb89746EE177E04251d7CDf8917E4C71aD6f361E",
-        "blockNumber": 37398069
+        "contractAddress": "0xd78FCe22e557246845236E7B6203e1dED28fd36b",
+        "blockNumber": 37398808
       }
     },
     {
       "id": "agriculture-drought",
       "name": "Agricultural Drought Relief",
-      "contractAddress": "0x332db07dE59c532e76C86be94943710B63C96EA3",
+      "contractAddress": "0x416c4bc445026bCdca129E1Fed5490765f29B9DF",
       "ensName": "agricultural-drought-relief.eth",
-      "createdAt": "2026-02-08T15:26:55.077Z",
+      "createdAt": "2026-02-08T15:51:33.956Z",
       "ensRegistration": {
         "success": true,
         "ensName": "agricultural-drought-relief.eth",
-        "contractAddress": "0x332db07dE59c532e76C86be94943710B63C96EA3",
-        "blockNumber": 37398071
+        "contractAddress": "0x416c4bc445026bCdca129E1Fed5490765f29B9DF",
+        "blockNumber": 37398810
       }
     }
   ]

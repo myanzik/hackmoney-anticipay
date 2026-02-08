@@ -2,6 +2,7 @@
 pragma solidity ^0.8.20;
 
 import {Community} from "./Community.sol";
+import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 /**
  * @title CommunityTreasury
@@ -21,14 +22,24 @@ contract CommunityTreasury {
     /// @notice Mapping to check if a community exists
     mapping(string => bool) public communityExists;
 
+    /// @notice USDC token address on Base
+    address public constant USDC = 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913;
+
     /// @notice Event emitted when a new community is created
     event CommunityCreated(
         string indexed communityName,
         address indexed communityContract
     );
 
-    /// @notice Event emitted when funds are donated to a community
-    event FundsDonated(
+    /// @notice Event emitted when ETH is donated to a community
+    event ETHDonated(
+        string indexed communityName,
+        address indexed donor,
+        uint256 amount
+    );
+
+    /// @notice Event emitted when USDC is donated to a community
+    event USDCDonated(
         string indexed communityName,
         address indexed donor,
         uint256 amount
@@ -67,7 +78,7 @@ contract CommunityTreasury {
     }
 
     /**
-     * @notice Donate funds to a specific community
+     * @notice Donate ETH to a specific community
      * @param _communityName The name of the community to donate to
      */
     function donateToCommunity(string memory _communityName)
@@ -81,7 +92,29 @@ contract CommunityTreasury {
         (bool success, ) = communityAddress.call{value: msg.value}("");
         require(success, "Donation transfer failed");
 
-        emit FundsDonated(_communityName, msg.sender, msg.value);
+        emit ETHDonated(_communityName, msg.sender, msg.value);
+    }
+
+    /**
+     * @notice Donate USDC to a specific community
+     * @param _communityName The name of the community to donate to
+     * @param _amount The amount of USDC to donate
+     */
+    function donateUSDCToCommunity(string memory _communityName, uint256 _amount)
+        external
+    {
+        require(_amount > 0, "Donation amount must be greater than 0");
+        require(communityExists[_communityName], "Community does not exist");
+
+        address communityAddress = communityContracts[_communityName];
+        
+        // Transfer USDC from donor to community
+        require(
+            IERC20(USDC).transferFrom(msg.sender, communityAddress, _amount),
+            "USDC transfer failed"
+        );
+
+        emit USDCDonated(_communityName, msg.sender, _amount);
     }
 
     /**
