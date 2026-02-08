@@ -41,6 +41,8 @@ async function main() {
   );
   const treasury = await CommunityTreasury.deploy();
   await treasury.waitForDeployment();
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
 
   const treasuryAddress = await treasury.getAddress();
   console.log(`✅ CommunityTreasury deployed at: ${treasuryAddress}`);
@@ -58,6 +60,9 @@ async function main() {
     console.log(`\n  Creating "${community.name}"...`);
     const tx = await treasury.createCommunity(community.name);
     const receipt = await tx.wait();
+
+    // Add delay to ensure state is settled before querying
+    await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const communityAddress = await treasury.getCommunityContract(
       community.name
@@ -113,7 +118,7 @@ async function main() {
   const deploymentData = {
     network: {
       name: network.name,
-      chainId: network.chainId,
+      chainId: network.chainId.toString(), // Convert BigInt to string
       deployer: deployer.address,
       deploymentDate: new Date().toISOString(),
     },
@@ -132,11 +137,16 @@ async function main() {
 
   const timestampedFilename = `deployment-${Date.now()}.json`;
   const deploymentFile = path.join(deploymentsDir, timestampedFilename);
-  fs.writeFileSync(deploymentFile, JSON.stringify(deploymentData, null, 2));
+  
+  // JSON replacer to handle BigInt values
+  const replacer = (key, value) =>
+    typeof value === "bigint" ? value.toString() : value;
+  
+  fs.writeFileSync(deploymentFile, JSON.stringify(deploymentData, replacer, 2));
 
   // Also save as latest.json for easy reference
   const latestFile = path.join(deploymentsDir, "latest.json");
-  fs.writeFileSync(latestFile, JSON.stringify(deploymentData, null, 2));
+  fs.writeFileSync(latestFile, JSON.stringify(deploymentData, replacer, 2));
 
   console.log(`✅ Deployment data saved to: ${timestampedFilename}`);
   console.log(`✅ Latest deployment saved to: latest.json`);

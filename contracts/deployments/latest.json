@@ -1,0 +1,66 @@
+{
+  "network": {
+    "name": "baseSepolia",
+    "chainId": "84532",
+    "deployer": "0x2D0D3950E148c23a9bA9Fa5229815AFa2730FC33",
+    "deploymentDate": "2026-02-08T15:27:10.985Z"
+  },
+  "treasury": {
+    "address": "0xdb2E9cCb12705D602C917401dF77fa05F465094A",
+    "deploymentTx": "0xea4c9d702ec4901f9e173b0aefba842d6c34704fb9791c09e1d5462da8ad4a76"
+  },
+  "communities": [
+    {
+      "id": "kathmandu-flood",
+      "name": "Kathmandu Flood Relief",
+      "contractAddress": "0xd9eEDd9838d6328cF16e20a4C536d57b257eaa85",
+      "ensName": "kathmandu-flood-relief.eth",
+      "createdAt": "2026-02-08T15:26:36.434Z",
+      "ensRegistration": {
+        "success": true,
+        "ensName": "kathmandu-flood-relief.eth",
+        "contractAddress": "0xd9eEDd9838d6328cF16e20a4C536d57b257eaa85",
+        "blockNumber": 37398065
+      }
+    },
+    {
+      "id": "terai-heatwave",
+      "name": "Terai Heatwave Protection",
+      "contractAddress": "0x3DE282515AC8148184077a062c84995d9Af4A43D",
+      "ensName": "terai-heatwave-protection.eth",
+      "createdAt": "2026-02-08T15:26:42.198Z",
+      "ensRegistration": {
+        "success": true,
+        "ensName": "terai-heatwave-protection.eth",
+        "contractAddress": "0x3DE282515AC8148184077a062c84995d9Af4A43D",
+        "blockNumber": 37398067
+      }
+    },
+    {
+      "id": "urban-poverty",
+      "name": "Urban Poverty Safety Net",
+      "contractAddress": "0xEb89746EE177E04251d7CDf8917E4C71aD6f361E",
+      "ensName": "urban-poverty-safety-net.eth",
+      "createdAt": "2026-02-08T15:26:49.785Z",
+      "ensRegistration": {
+        "success": true,
+        "ensName": "urban-poverty-safety-net.eth",
+        "contractAddress": "0xEb89746EE177E04251d7CDf8917E4C71aD6f361E",
+        "blockNumber": 37398069
+      }
+    },
+    {
+      "id": "agriculture-drought",
+      "name": "Agricultural Drought Relief",
+      "contractAddress": "0x332db07dE59c532e76C86be94943710B63C96EA3",
+      "ensName": "agricultural-drought-relief.eth",
+      "createdAt": "2026-02-08T15:26:55.077Z",
+      "ensRegistration": {
+        "success": true,
+        "ensName": "agricultural-drought-relief.eth",
+        "contractAddress": "0x332db07dE59c532e76C86be94943710B63C96EA3",
+        "blockNumber": 37398071
+      }
+    }
+  ]
+}

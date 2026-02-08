@@ -1,4 +1,4 @@
-const ethers = require("ethers");
+const { ethers } = require("ethers");
 
 /**
  * ENS Registry interface for Base Sepolia
@@ -75,7 +75,7 @@ const ENS_CONFIG = {
   baseSepolia: {
     ensRegistry: "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e", // Standard ENS registry
     publicResolver: "0x8FADE5041B8357cd85B472921CdAF38B7e68600e", // Public resolver on Base Sepolia
-    reverseRegistrar: "0x084b1c3C81545d370f3634392De611CaeBF02924", // Reverse registrar
+    reverseRegistrar: "0x00000BeEF055f7934784D6d81b6BC86665630dbA", // Reverse registrar
     tld: "eth",
   },
 };
