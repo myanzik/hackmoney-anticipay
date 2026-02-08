@@ -19,8 +19,8 @@ export const communities: Community[] = [
     name: "Kathmandu Flood Relief",
     description: "Supporting communities vulnerable to monsoon floods in Kathmandu Valley. This fund provides anticipatory cash assistance to families during flood seasons.",
     walletAddress: "0x1234567890abcdef1234567890abcdef12345678",
-    contractAddress: "0x0000000000000000000000000000000000000000", // TODO: Update after deployment
-    ensName: "kathmandu-flood-relief.eth", // TODO: Update after deployment
+    contractAddress: "0x5044e09F6a07CBB9aed3379c351d17e28A904467",
+    ensName: "kathmandu-flood-relief.eth",
     currentFunding: 50000000000000000000, // 50 ETH in wei
     targetFunding: 500000000000000000000, // 500 ETH in wei
     region: "Kathmandu, Nepal",
@@ -33,8 +33,8 @@ export const communities: Community[] = [
     name: "Terai Heatwave Protection",
     description: "Emergency cash transfers during extreme heat events in the Terai plains. Provides cooling support and emergency supplies for vulnerable populations.",
     walletAddress: "0xabcdef1234567890abcdef1234567890abcdef12",
-    contractAddress: "0x0000000000000000000000000000000000000000", // TODO: Update after deployment
-    ensName: "terai-heatwave-protection.eth", // TODO: Update after deployment
+    contractAddress: "0x694a3293A67c9659204b8EDD130551b5f6538779",
+    ensName: "terai-heatwave-protection.eth",
     currentFunding: 25000000000000000000, // 25 ETH in wei
     targetFunding: 300000000000000000000, // 300 ETH in wei
     region: "Terai, Nepal",
@@ -47,8 +47,8 @@ export const communities: Community[] = [
     name: "Urban Poverty Safety Net",
     description: "Basic income streaming for urban low-income households to build financial resilience and enable income-generating opportunities.",
     walletAddress: "0x1234567890abcdef12345678901abcdef1234567",
-    contractAddress: "0x0000000000000000000000000000000000000000", // TODO: Update after deployment
-    ensName: "urban-poverty-safety-net.eth", // TODO: Update after deployment
+    contractAddress: "0xd78FCe22e557246845236E7B6203e1dED28fd36b",
+    ensName: "urban-poverty-safety-net.eth",
     currentFunding: 40000000000000000000, // 40 ETH in wei
     targetFunding: 350000000000000000000, // 350 ETH in wei
     region: "Lalitpur, Nepal",
@@ -61,8 +61,8 @@ export const communities: Community[] = [
     name: "Agricultural Drought Relief",
     description: "Anticipatory support for farming communities during drought seasons. Helps farmers manage crop failures and maintain livelihoods.",
     walletAddress: "0x567890abcdef1234567890abcdef1234567890ab",
-    contractAddress: "0x0000000000000000000000000000000000000000", // TODO: Update after deployment
-    ensName: "agricultural-drought-relief.eth", // TODO: Update after deployment
+    contractAddress: "0x416c4bc445026bCdca129E1Fed5490765f29B9DF",
+    ensName: "agricultural-drought-relief.eth",
     currentFunding: 20000000000000000000, // 20 ETH in wei
     targetFunding: 280000000000000000000, // 280 ETH in wei
     region: "Sindhuli, Janakpur",
